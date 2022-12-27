@@ -4,6 +4,11 @@ export class LoginPage{
     txt_username = '#user-name'
     txt_password = '#password'
     btn_login = '#login-button'
+    lohi = '[class=product_sort_container]'
+    product = '#add-to-cart-sauce-labs-fleece-jacket'
+    cart = '#shopping_cart_container'
+    removeProduct = '#remove-sauce-labs-fleece-jacket'
+
 
     navigate(url: string){
         cy.visit(url)
@@ -30,5 +35,17 @@ export class LoginPage{
         this.inputUsername(username)
         this.inputPassword(password)
         this.clickLogin()
+    }
+    filterPrice(){
+        cy.get(this.lohi).select('lohi')
+    }
+    addtoCart(){
+        cy.get(this.product).click()
+        cy.get(this.cart).click()
+        cy.contains('Sauce Labs Fleece Jacket').should('be.visible') 
+    }
+    removeCart(){
+        cy.get(this.removeProduct).click()
+        cy.contains('Sauce Labs Fleece Jacket').should('not.exist') 
     }
 }
